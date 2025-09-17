@@ -27,10 +27,13 @@
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->title }}</td>
                 <td>{{ $task->title}}</td>
-                <td><img class="w-25" src="{{ asset('storage/' . $task->image) }}" alt=""></td>
+                <td><img style="width: 50px" src="{{ asset('storage/' . $task->image) }}" alt=""></td>
                 <td>
                     <button type="button" class="btn btn-primary">Edit</button>
-                    <button type="button" class="btn btn-danger">Danger</button>
+                    <form class="d-inline" action="{{ route('tasks.delete',$task->id) }}" method="POST">
+                        @csrf
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
