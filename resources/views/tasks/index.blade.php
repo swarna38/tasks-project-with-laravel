@@ -4,7 +4,7 @@
     <h2 class="fw-bolder">
         Tasks List
     </h2>
-    
+
     {{-- //success msg show  --}}
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -30,8 +30,9 @@
                 <td><img style="width: 50px" src="{{ asset('storage/' . $task->image) }}" alt=""></td>
                 <td>
                     <button type="button" class="btn btn-primary">Edit</button>
-                    <form class="d-inline" action="{{ route('tasks.delete',$task->id) }}" method="POST">
+                    <form class="d-inline" action="{{ route('tasks.delete',$task->id) }}" method="POST"  onsubmit="return confirm('Are you sure you want to delete this task?')">
                         @csrf
+                        @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>

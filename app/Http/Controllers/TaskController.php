@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -37,7 +38,16 @@ class TaskController extends Controller
     }
 
     public function destroy($id){
-        DB::table('task')->where('id', $id)->delete();
+
+        $task = DB::table('task')->where('id',$id)->first();
+        
+        //delete image file if exists
+        if ($task->image && Storage::disk('public')->exists($task->image)) {
+        Storage::disk('public')->delete($task->image);
+    }
+
+         DB::table('task')->where('id', $id)->delete();
         return redirect()->route('tasks.index')->with('success','Task successfully deleted');
+
     }
 }
