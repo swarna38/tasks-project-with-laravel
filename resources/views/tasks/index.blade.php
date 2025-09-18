@@ -26,10 +26,13 @@
                 <tr>
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->title }}</td>
-                <td>{{ $task->title}}</td>
+                <td>{{ $task->description }}</td>
+         
+
                 <td><img style="width: 50px" src="{{ asset('storage/' . $task->image) }}" alt=""></td>
                 <td>
-                    <button type="button" class="btn btn-primary">Edit</button>
+                     <a class="btn btn-primary" href="{{ route('tasks.edit', $task->id) }}">Edit</a>
+
                     <form class="d-inline" action="{{ route('tasks.delete',$task->id) }}" method="POST"  onsubmit="return confirm('Are you sure you want to delete this task?')">
                         @csrf
                         @method('DELETE')

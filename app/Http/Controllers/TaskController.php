@@ -37,10 +37,32 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success','task successfully done');
     }
 
+    //data edit
+    public function edit($id){
+        $tasks = DB::table('task')->where('id',$id)->first();
+        return view('tasks.edit',['task' => $tasks]);
+    }
+
+    //DATA Update
+    public function update(Request $request,$id){
+        
+
+         DB::table('task')->where('id',$id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            // 'image' => $request->imagePath,
+            'updated_at' => now(),
+        ]);
+        return redirect()->route('tasks.index')->with('success','task update successfully done');
+    }
+
+
+
+    //data delete
     public function destroy($id){
 
         $task = DB::table('task')->where('id',$id)->first();
-        
+
         //delete image file if exists
         if ($task->image && Storage::disk('public')->exists($task->image)) {
         Storage::disk('public')->delete($task->image);
