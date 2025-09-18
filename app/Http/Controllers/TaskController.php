@@ -8,7 +8,7 @@ class TaskController extends Controller
 {
      public function index(){
         //all data get
-        $tasks = DB::table('task')->get();
+        $tasks = DB::table('task')->orderBy('id', 'desc')->get();
         return view('tasks.index',['tasks' => $tasks]);
     }
 
