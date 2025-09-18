@@ -24,10 +24,12 @@
         <tbody>
             @foreach ($tasks as $task)
                 <tr>
-                <td>{{ $task->id }}</td>
+                    {{-- id serial maintain   --}}
+                <td>{{ $loop->iteration +$tasks->firstItem() -1 }}</td>
+
                 <td>{{ $task->title }}</td>
                 <td>{{ $task->description }}</td>
-         
+
 
                 <td><img style="width: 50px" src="{{ asset('storage/' . $task->image) }}" alt=""></td>
                 <td>
@@ -43,4 +45,7 @@
             @endforeach
         </tbody>
     </table>
+
+    {{-- //for paginate     --}}
+    {{ $tasks->links('pagination::bootstrap-5') }}
 @endsection
