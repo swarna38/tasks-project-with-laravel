@@ -45,12 +45,27 @@ class TaskController extends Controller
 
     //DATA Update
     public function update(Request $request,$id){
-        
+        $task = DB::table('task')->where('id',$id)->first();
+        $imagePath = $task->image;
+
+
+        //check if file have an image
+        if($request->hasFile('image')){
+
+            //old image file delete
+            if ($task->image && Storage::disk('public')->exists($task->image)) {
+             Storage::disk('public')->delete($task->image);
+            }
+
+            //store new image
+            $imagePath = $request->file('image')->store('tasks','public');
+
+        }
 
          DB::table('task')->where('id',$id)->update([
             'title' => $request->title,
             'description' => $request->description,
-            // 'image' => $request->imagePath,
+            'image' => $imagePath,
             'updated_at' => now(),
         ]);
         return redirect()->route('tasks.index')->with('success','task update successfully done');
