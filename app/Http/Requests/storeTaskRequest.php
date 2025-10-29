@@ -30,7 +30,7 @@ class storeTaskRequest extends FormRequest
             ],
             'description' =>[
                 'nullable',
-                'max:100',
+                'max:1000',
                 'min:18',
             ],
             'image' => [
@@ -41,4 +41,17 @@ class storeTaskRequest extends FormRequest
             ]
         ];
     }
+
+    //custom error msg show
+     public function messages(): array
+     {
+        return[
+            'title.required' => 'title dite hobe',
+            'title.min' => 'min 6 charcter dite hobe',
+            'title.max' => 'max 120 chrcter',
+            'description.min' => 'min 18 charcter dite hobe',
+            'description.max' => 'max 100 charcter deuya jabe',
+            'image.mimes' => 'image dite hobe'
+        ];
+     }
 }
