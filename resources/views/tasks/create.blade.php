@@ -1,6 +1,17 @@
 @extends('layouts.app')
 @section('content')
     <h2>add new task</h2>
+
+    {{-- ====show all error msg ==  --}}
+    @if($errors->any())
+        <ul>
+            @foreach ($errors->all() as $msg)
+                <li>
+                    {{ $msg }}
+                </li>
+            @endforeach
+        </ul>
+    @endif
     <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-light">
         @csrf
   <!-- Title -->

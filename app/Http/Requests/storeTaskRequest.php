@@ -54,4 +54,14 @@ class storeTaskRequest extends FormRequest
             'image.mimes' => 'image dite hobe'
         ];
      }
+
+     // trim 
+     public function prepareForValidation(): void
+        {
+            $this->merge([
+                'title' => trim((string) $this->input('title')),
+                'description' => trim((string) $this->input('description')),
+            ]);
+        }
+
 }
