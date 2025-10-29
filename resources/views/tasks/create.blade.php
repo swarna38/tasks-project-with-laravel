@@ -6,13 +6,26 @@
   <!-- Title -->
   <div class="mb-3">
     <label for="title" class="form-label fw-bold">Title</label>
-    <input type="text" name="title" id="title" class="form-control" placeholder="Enter task title" required>
+    <input type="text" name="title" id="title" class="form-control" placeholder="Enter task title">
+
+    {{-- ====error msg shoe===  --}}
+    @error('title')
+        <div class="alert alert-danger">
+            {{ $message }}
+        </div>
+    @enderror
   </div>
 
   <!-- Description -->
   <div class="mb-3">
     <label for="description" class="form-label fw-bold">Description</label>
     <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter task description"></textarea>
+
+    @error('description')
+        <div class="alert alert-danger">
+            {{ $message }}
+        </div>
+    @enderror
   </div>
 
   <!-- Image -->
@@ -20,6 +33,12 @@
     <label for="image" class="form-label fw-bold">Image</label>
     <input type="file" name="image" id="image" class="form-control">
     <div class="form-text">Optional: Upload an image (jpg, png, etc.)</div>
+
+    @error('image')
+        <div class="alert alert-danger">
+            {{ $message }}
+        </div>
+    @enderror
   </div>
 
   <!-- Submit Button -->

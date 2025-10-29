@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Http\Requests\storeTaskRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -17,7 +19,8 @@ class TaskController extends Controller
     }
 
     //data insert
-    public function store(Request $request){
+    public function store(storeTaskRequest $request){
+
         $imagePath = null;
         $title = $request->title;
         $description = $request->description;
